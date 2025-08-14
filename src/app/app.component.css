@@ -1,0 +1,38 @@
+mat-card {
+  margin: 16px;
+}
+
+.tab-form {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(220px, 1fr));
+  gap: 16px;
+}
+
+.tab-form .full {
+  grid-column: 1 / -1;
+}
+
+.row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.radio-label {
+  min-width: 140px;
+  color: rgba(0,0,0,0.6);
+}
+
+.radio-row {
+  display: flex;
+  gap: 12px;
+}
+
+mat-card-actions {
+  display: flex;
+  align-items: center;
+}
+
+.spacer {
+  flex: 1 1 auto;
+}
