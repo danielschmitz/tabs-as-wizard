@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule, FormBuilder, FormGroup } from '@angular/forms';
 import { MatTabsModule } from '@angular/material/tabs';
@@ -27,8 +27,9 @@ import { MatRadioModule } from '@angular/material/radio';
   styleUrl: './app.component.css'
 })
 export class AppComponent {
-  selectedIndex = 0;
+  selectedIndex = signal(0);
   readonly totalTabs = 10;
+
   form: FormGroup;
 
   constructor(private fb: FormBuilder) {
@@ -86,8 +87,8 @@ export class AppComponent {
     });
   }
 
-  get isFirst(): boolean { return this.selectedIndex === 0; }
-  get isLast(): boolean { return this.selectedIndex === this.totalTabs - 1; }
+  get isFirst(): boolean { return this.selectedIndex() === 0; }
+  get isLast(): boolean { return this.selectedIndex() === this.totalTabs - 1; }
 
   // Form group getters for template binding
   get step1(): FormGroup { return this.form.get('step1') as FormGroup; }
@@ -102,10 +103,10 @@ export class AppComponent {
   get step10(): FormGroup { return this.form.get('step10') as FormGroup; }
 
   nextTab(): void {
-    if (!this.isLast) this.selectedIndex++;
+    if (!this.isLast) this.selectedIndex.update(index => index + 1);
   }
 
   prevTab(): void {
-    if (!this.isFirst) this.selectedIndex--;
+    if (!this.isFirst) this.selectedIndex.update(index => index - 1);
   }
 }
